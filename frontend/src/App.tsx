@@ -1,5 +1,11 @@
+import Controller from './components/Controller';
+
 function App() {
-    return <div className='text-2xl bg-blue-500'>Hello</div>;
+    return (
+        <div>
+            <Controller />
+        </div>
+    );
 }
 
 export default App;

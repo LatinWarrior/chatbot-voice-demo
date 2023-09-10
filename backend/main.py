@@ -28,8 +28,8 @@ handler = Mangum(app)
 
 # CORS - Origins
 origins = [
-    "http://localhost:5273",
-    "http://localhost:5274",
+    "http://localhost:5173",
+    "http://localhost:5174",
     "http://localhost:4173",
     "http://localhost:4174",
     "http://localhost:3000",
@@ -104,13 +104,5 @@ async def post_audio(file: UploadFile = File(...)):
     # return StreamingResponse(iterate_file(), media_type = "audio/mpeg")
     return StreamingResponse(iterate_file(), media_type = "application/octet-stream")
     
-
-# # Post bot response
-# # Note: Not playing in browser when using post request.
-# @app.post('/post-audio/')
-# async def post_audio(file UploadFile = File(...)):
-#     print('Hello')
-
-
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
