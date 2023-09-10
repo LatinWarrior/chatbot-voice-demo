@@ -14,3 +14,12 @@ def get_openai_config():
     except Exception as e:
         print(e)
         return
+    
+def get_eleven_labs_config():
+    try:
+        # Retrieve Environment variable.
+        api_key = config('ELEVEN_LABS_API_KEY')
+        return {'api_key': api_key}
+    except Exception as e:
+        print(e)
+        return

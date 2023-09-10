@@ -18,6 +18,7 @@ from mangum import Mangum
 # Custom Function Imports
 from functions.database import store_messages, reset_messages
 from functions.openai_requests import convert_audio_to_text, get_chat_response
+from functions.text_to_speach import convert_text_to_speech
 
 # Initialize App
 app = FastAPI()
@@ -73,12 +74,29 @@ async def get_audio():
     # Get ChatGPT Response
     chat_response = get_chat_response(message_decoded)
     
+    # Guard: Ensure message decoded
+    if not chat_response:
+        return HTTPException(status_code = 400, detail = 'Failed to get chat response')
+    
     # Store messages
     store_messages(message_decoded, chat_response)
     
-    print(chat_response)
+    # print(chat_response)
     
-    return 'Done'
+    # Convert chat response to audio
+    audio_output = convert_text_to_speech(chat_response)
+    
+    # Guard: Text converted to speech
+    if not audio_output:
+        return HTTPException(status_code = 400, detail = 'Failed to get Eleven Labs audio response')
+    
+    # Create a generator that yields chunks of data.
+    def iterate_file():
+        yield audio_output
+        
+    # Return audio file
+    return StreamingResponse(iterate_file(), media_type = "audio/mpeg")
+    
 
 # # Post bot response
 # # Note: Not playing in browser when using post request.
