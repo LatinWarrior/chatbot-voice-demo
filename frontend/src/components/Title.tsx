@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { Tooltip } from 'react-tooltip';
 
 type Props = {
     setMessages: any;
@@ -35,6 +36,8 @@ const Title = ({ setMessages }: Props) => {
         <div className='flex justify-between items-center w-full p-4 bg-gray-900 text-white font-bold shadow'>
             <div className='italic'>Rachel</div>
             <button
+                data-tooltip-id='reload-tooltip'
+                data-tooltip-content='Clear conversation'
                 onClick={resetConversation}
                 className={
                     'transition-all duration-300 text-blue-300 hover:text-pink-500 ' +
@@ -54,6 +57,7 @@ const Title = ({ setMessages }: Props) => {
                     />
                 </svg>
             </button>
+            <Tooltip id='reload-tooltip' />
         </div>
     );
 };

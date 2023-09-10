@@ -15,7 +15,7 @@ def get_recent_messages():
     if x < 0.5:
         learn_instruction['content'] + ' Your response will include some dry humor.'
     else:
-        learn_instruction['content'] + ' Your response will include a rather challenging question.'
+        learn_instruction['content'] + ' Your response will include a random fact about food.'
 
     messages = [learn_instruction]
     # Get last messages
