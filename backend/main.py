@@ -16,7 +16,7 @@ import openai
 from mangum import Mangum
 
 # Custom Function Imports
-from functions.database import store_messages
+from functions.database import store_messages, reset_messages
 from functions.openai_requests import convert_audio_to_text, get_chat_response
 
 # Initialize App
@@ -47,6 +47,12 @@ app.add_middleware(
 @app.get("/health")
 async def root():    
     return {"message": "healthy"}
+
+# Reset messages
+@app.get("/reset")
+async def reset_conversation():   
+    reset_messages()
+    return {"message": "conversation was reset"}
 
 # Get audio
 @app.get('/post-audio-get/')
@@ -82,7 +88,4 @@ async def get_audio():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000# The `)` is used to close the arguments of a function
-    # or method. In this case, it is used to close the
-    # arguments of the `post_audio` function.
-    )
+    uvicorn.run(app, host="0.0.0.0", port=8000)
