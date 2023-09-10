@@ -7,12 +7,9 @@ def get_recent_messages():
     file_name = 'stored_data.json'
     learn_instruction = {
         "role": "system",
-        "content": "You are interviewing the user for a job as a retail assistance. Ask short questions that are relevant to the junior position. Your name is Rachel. The user is called Luis. Keep your answers under 30 words."
+        "content": "You are interviewing the user for a job as a retail assistant. Ask short questions that are relevant to the junior position. Your name is Rachel. The user is called Luis. Keep your answers under 30 words."
     }
-    
-    # Initialize messages
-    messages = []
-    
+
     # Add a random element
     x = random.uniform(0, 1)
     if x < 0.5:
@@ -20,14 +17,12 @@ def get_recent_messages():
     else:
         learn_instruction['content'] + ' Your response will include a rather challenging question.'
 
-    # Append instruction to messages
-    messages.append(learn_instruction)
-    
+    messages = [learn_instruction]
     # Get last messages
     try:
         with open(file_name) as user_file:
             data = json.load(user_file)
-            
+
             # Append last 5 items of data
             if data:
                 if len(data) < 5:
@@ -39,7 +34,7 @@ def get_recent_messages():
     except Exception as e:
         print(e)
         return
-    
+
     # Return 
     return messages
 
@@ -59,7 +54,7 @@ def store_messages(request_message, response_message):
     messages.append(user_message)
     messages.append(assistant_message)
     
-    print(assistant_message)
+    # print(assistant_message)
     
     # Save the updated file
     with open(file_name, 'w') as f:
