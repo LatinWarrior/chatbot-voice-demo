@@ -7,6 +7,7 @@
 # activate: $ source [some_env_name]/Scripts/activate (Windows)
 # deactivate: $ conda deactivate
 # install python requirements: pip3 install -r requirements.txt
+# create dependencies directory: $ pip3 install -t dependencies -r requirements.txt
 
 # Main imports
 from fastapi import FastAPI, File, UploadFile, HTTPException
