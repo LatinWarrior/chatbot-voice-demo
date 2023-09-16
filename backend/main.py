@@ -25,9 +25,6 @@ from functions.text_to_speach import convert_text_to_speech
 # Initialize App
 app = FastAPI()
 
-# Create handler for AWS to hook up on to run our app.
-handler = Mangum(app)
-
 # CORS - Origins
 origins = [
     "http://localhost:5173",
@@ -45,6 +42,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Create handler for AWS to hook up on to run our app.
+handler = Mangum(app)
 
 # Check health
 @app.get("/health")
