@@ -1,7 +1,8 @@
 # run project: $ uvicorn main:app
 # run project with reload: $ uvicorn main:app --reload
 # 
-# create: python3 -m venv [some_env_name]
+# create: python3 -m venv [some_env_name] (Mac)
+# create: python -m venv [some_env_name] (Windows)
 # activate: $ source [some_env_name]/bin/activate (Mac)
 # activate: $ source [some_env_name]/Scripts/activate (Windows)
 # deactivate: $ conda deactivate
