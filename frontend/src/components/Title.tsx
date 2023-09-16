@@ -9,12 +9,15 @@ type Props = {
 const Title = ({ setMessages }: Props) => {
     const [isResetting, setIsResetting] = useState(false);
 
+    const apiUrl = process.env.REACT_APP_BACKEND_URL;
+
     // Reset the conversation.
     const resetConversation = async () => {
         setIsResetting(true);
 
         await axios
-            .get('http://localhost:8000/reset')
+            // .get('http://localhost:8000/reset')
+            .get(`${apiUrl}/reset`)
             .then((res) => {
                 if (res.status === 200) {
                     // console.log(res.data);

@@ -191,3 +191,4 @@ archive.zip
 .DS_Store
 
 dependencies
+*.zip

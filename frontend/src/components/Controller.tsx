@@ -20,6 +20,8 @@ const Controller = () => {
         const myMessage = { sender: 'me', blobUrl };
         const messageArr = [...messages, myMessage];
 
+        const apiUrl = process.env.REACT_APP_BACKEND_URL;
+
         // Convert blog URL to blob object.
         fetch(blobUrl)
             .then((res) => res.blob())
@@ -31,10 +33,15 @@ const Controller = () => {
 
                 // Send form data to API endpoint.
                 await axios
-                    .post('http://localhost:8000/post-audio', formData, {
-                        headers: { 'Content-Type': 'audio/mpeg' },
-                        responseType: 'arraybuffer',
-                    })
+                    // .post('http://localhost:8000/post-audio', formData, {
+                    .post(
+                        `${apiUrl}/post-audio`,
+                        formData,
+                        {
+                            headers: { 'Content-Type': 'audio/mpeg' },
+                            responseType: 'arraybuffer',
+                        }
+                    )
                     .then((res: any) => {
                         const blob = res.data;
                         const audio = new Audio();
